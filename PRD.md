@@ -313,37 +313,39 @@ g = X^T · (y - p)
 ### 7.1 Component Diagram
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                         main.py                        │
-│                (pipeline orchestrator)                 │
-└──────────────┬─────────────────────┬───────────────────┘
-               │                     │
-               │                     │
-               ▼                     ▼
-     ┌────────────────────┐   ┌──────────────────────┐
-     │  generate_points.py│   │ logistic_regression.py│
-     │  (data build + 2D  │   │ (manual training +    │
-     │  scatter plot)     │   │ visualization)        │
-     └──────────┬─────────┘   └──────────┬────────────┘
-                │                        │
+┌─────────────────────────────────────────────────────────┐
+│                        main.py                          │
+│                 (pipeline orchestrator)                 │
+└──────────────┬──────────────────────┬───────────────────┘
+               │                      │
+               │                      │
+               ▼                      ▼
+     ┌─────────────────────┐  ┌──────────────────────────┐
+     │ generate_points.py  │  │ logistic_regression.py   │
+     │ (data build + 2D    │  │ (manual training +       │
+     │ scatter plot)       │  │ visualization)           │
+     └──────────┬──────────┘  └──────────┬───────────────┘
                 │                        │
                 ▼                        ▼
-      random_points.csv        gradient history, metrics,
-      + points_visualization   predictions, manual plots
-                └──────────────┬───────────────┐
-                               ▼               │
-                      ┌────────────────────────┴──────────┐
-                      │           results_output/         │
-                      │  • datasets & histories           │
-                      │  • manual visualizations          │
-                      │  • comparison tables & plots      │
-                      └──────────────┬────────────────────┘
-                                     │
-                                     ▼
-                       ┌────────────────────────────┐
-                       │ logistic_regression_sklearn│
-                       │ .py (baseline comparison)   │
-                       └────────────────────────────┘
+      random_points.csv          gradient history, metrics,
+      + points_visualization     predictions, manual plots
+                │                        │
+                └────────────┬───────────┘
+                             │
+                             ▼
+                  ┌──────────────────────┐
+                  │   results_output/    │
+                  │  • datasets          │
+                  │  • histories         │
+                  │  • manual plots      │
+                  │  • comparison files  │
+                  └──────────┬───────────┘
+                             │
+                             ▼
+               ┌──────────────────────────────┐
+               │ logistic_regression_sklearn  │
+               │ .py (baseline comparison)    │
+               └──────────────────────────────┘
 ```
 
 ### 7.2 Data Flow
