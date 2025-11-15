@@ -44,7 +44,8 @@ def main():
     print("\nThis script will:")
     print("  1. Generate random points dataset (2 groups)")
     print("  2. Train logistic regression model using gradient descent")
-    print("  3. Generate visualizations and results")
+    print("  3. Compare manual implementation with scikit-learn")
+    print("  4. Generate visualizations and results")
     print("\n")
 
     # Step 1: Generate points
@@ -63,6 +64,11 @@ def main():
         print("\n⚠ Pipeline stopped due to error in model training.")
         sys.exit(1)
 
+    # Step 3: Run comparison with scikit-learn
+    if not run_script("logistic_regression_sklearn.py", "Comparing Manual vs Scikit-Learn Implementation"):
+        print("\n⚠ Warning: Comparison script failed, but main results are available.")
+        # Don't exit - comparison is optional
+
     # Success summary
     print("\n" + "=" * 70)
     print("✓ PIPELINE COMPLETED SUCCESSFULLY!")
@@ -74,6 +80,9 @@ def main():
     print("  • logistic_regression_results.csv      - Final predictions and errors")
     print("  • classification_results_3d.png        - 3D visualization with sigmoid surface")
     print("  • training_metrics.png                 - Error and log-likelihood curves")
+    print("  • comparison_manual_vs_sklearn.csv     - Comparison table")
+    print("  • comparison_visualization.png         - Comparison charts")
+    print("  • comparison_decision_surfaces.png     - Side-by-side 3D surfaces")
     print("\n" + "=" * 70)
 
 if __name__ == "__main__":

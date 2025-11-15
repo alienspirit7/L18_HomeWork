@@ -102,3 +102,87 @@
 **Prompt:** *"Combine error function and likelihood function into the same graph"*
 
 **Actions:** Merged two subplots into single graph with dual y-axes; left axis for average error, right axis for log-likelihood.
+
+---
+
+## 16. Create Pipeline Script
+**Prompt:** *"Write main script that will first initiate points creation and then initiate logistic regression"*
+
+**Actions:** Created `main.py` to orchestrate the pipeline; runs `generate_points.py` first, then `logistic_regression.py`; includes error handling and progress messages.
+
+---
+
+## 17. Comprehensive Documentation
+**Prompt:** *"Use Screenshot files... and create clear README file, with structure and explanation..."*
+
+**Actions:** Created comprehensive `README.md` with project structure, mathematical formulas, step-by-step explanations, terminal outputs, code locations, and results interpretation.
+
+---
+
+## 18. Create Project Planning Documents
+**Prompt:** *"Create PRD file for the script development and tasks.json file... Development time is 2 hours"*
+
+**Actions:** Created `PRD.md` (Product Requirements Document) with scope, requirements, and success metrics; created `tasks.json` with 5 phases, 34 subtasks, and timeline breakdown totaling 120 minutes.
+
+---
+
+## 19. Correct Convergence Iterations
+**Prompt:** *"Readme says results converged in 429 iterations, but I think it converged after 5 or 6 iterations. Please check and correct..."*
+
+**Actions:** Verified `gradient_descent_history.csv` showing only 6 iterations; corrected README.md, PRD.md, and tasks.json to reflect actual convergence at iteration 5 (6 total iterations).
+
+---
+
+## 20. Clarify Misclassification Claims
+**Prompt:** *"ReadMe says 'Only ~1 misclassified point out of 4,000' Why? What is the misqualified point?"*
+
+**Actions:** Analyzed results CSV to verify 100% accuracy with 0 misclassifications; corrected all documentation to show perfect accuracy (4,000/4,000 correct predictions) instead of ~1 misclassified point.
+
+---
+
+## 21. Remove Screenshot References
+**Prompt:** *"Remove Screenshot filed from ReadMe descriptions"*
+
+**Actions:** Removed screenshot file entries from README.md project structure; removed "from the screenshots" text from Mathematical Formulas section; updated References section to point to code implementation instead of screenshot files.
+
+---
+
+## 22. Add Architecture Diagrams to README
+**Prompt:** *"Add Component diagram and data flow to ReadMe file too"*
+
+**Actions:** Added System Architecture section to README.md with Component Diagram (showing main.py orchestrating generate_points.py and logistic_regression.py) and Data Flow diagram (illustrating the complete pipeline from data generation through training to final outputs); updated Table of Contents to include new section.
+
+---
+
+## 23. Add Scikit-Learn Comparison
+**Prompt:** *"Now add one more python script where we do gradient decent with existing libraries, visualise it and compare the result with the manual process."*
+
+**Actions:** Created `logistic_regression_sklearn.py` implementing comparison with scikit-learn LogisticRegression; generates 3 new visualizations (comparison charts, side-by-side 3D surfaces); added scikit-learn to requirements.txt; updated main.py to include comparison step as Step 3.
+
+---
+
+## 24. Add Comparison Section to README
+**Prompt:** *"Use Screenshots in the folder and add comparison to the readme file with the plots. Use the explanation given above on the differences of different approaches in sklearn and our manual method"*
+
+**Actions:** Added comprehensive "Comparison: Manual vs Scikit-Learn" section to README.md including: optimization approaches explanation (Gradient Ascent vs LBFGS), comparison tables (algorithm differences, alternative solvers), visualizations with screenshots, sample output, key insights, mathematical equivalence explanation, and when to use each approach; updated project structure to show new comparison files; updated Table of Contents.
+
+---
+
+## 25. Correct Comparison Output in README
+**Prompt:** *"Correct ReadMe, Sample Comparison Output shows almost no difference between manual and sklearn runs, while there is significant difference in betas found. Use only screenshot files for examples of comparison in ReadMe file"*
+
+**Actions:** Removed fabricated "Sample Comparison Output" section showing unrealistic tiny differences; replaced with actual screenshot references (Screenshot 2025-11-15 at 22.05.25.png and 22.06.10.png); updated "Key Insights" section to clarify that different optimization algorithms produce different β coefficients; emphasized that both solutions are valid for perfectly separable data.
+
+---
+
+## 26. Remove Duplicate Visualization Sections
+**Prompt:** *"Remove visualisation 1 and visualisation 2 as they basically duplucate the info in Readme"*
+
+**Actions:** Removed "Visualization 1: Coefficient Comparison" and "Visualization 2: Decision Surface Comparison" sections from README.md; removed duplicate "Visual Comparison: Screenshots" section at bottom of comparison; consolidated all comparison visuals into single "Comparison Results" section with only the actual screenshot files.
+
+---
+
+## 27. Use Screenshot for 3D Visualization
+**Prompt:** *"Use Screenshot in folder instead of current image for 3.3 3D Visualization (classification_results_3d.png)"*
+
+**Actions:** Updated section 3.3 in README.md to use Screenshot 2025-11-15 at 21.16.08.png instead of results_output/classification_results_3d.png for the 3D visualization showing the sigmoid surface with data points.

@@ -1,0 +1,7 @@
+Metric,Manual,Scikit-Learn,Difference
+Intercept (β0),-180.757211,-8.630554,172.126657
+Coefficient β1,150.260560,8.616807,141.643753
+Coefficient β2,153.458902,8.708361,144.750542
+Accuracy (%),100.00,100.00,0.00
+Misclassified,0,0,0
+Iterations,6,9,3

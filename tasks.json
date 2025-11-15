@@ -1,0 +1,438 @@
+{
+  "project": {
+    "name": "Logistic Regression from Scratch",
+    "version": "1.1",
+    "totalEstimatedTime": "120 minutes",
+    "status": "completed",
+    "completionDate": "2025-11-15"
+  },
+  "tasks": [
+    {
+      "id": "T1",
+      "phase": "Phase 1: Data Generation",
+      "title": "Create reproducible dataset",
+      "description": "Generate two Gaussian clusters, export CSV, and produce a 2D scatter plot for verification.",
+      "estimatedTime": 20,
+      "actualTime": 20,
+      "status": "completed",
+      "priority": "high",
+      "dependencies": [],
+      "subtasks": [
+        {
+          "id": "T1.1",
+          "title": "Bootstrap script",
+          "description": "Set up imports, random seed, and ensure results_output/ exists.",
+          "estimatedTime": 3,
+          "status": "completed",
+          "codeLocation": "generate_points.py:1-15"
+        },
+        {
+          "id": "T1.2",
+          "title": "Generate clusters",
+          "description": "Create 2x2000 samples centered at (0.2,0.2) and (0.8,0.8); clip to [0,1].",
+          "estimatedTime": 7,
+          "status": "completed",
+          "codeLocation": "generate_points.py:16-33"
+        },
+        {
+          "id": "T1.3",
+          "title": "Persist dataset",
+          "description": "Assemble DataFrame, print summary, and save random_points.csv.",
+          "estimatedTime": 4,
+          "status": "completed",
+          "codeLocation": "generate_points.py:35-46",
+          "outputFile": "results_output/random_points.csv"
+        },
+        {
+          "id": "T1.4",
+          "title": "Visual quality check",
+          "description": "Plot blue/red scatter plot and export points_visualization.png.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "generate_points.py:48-66",
+          "outputFile": "results_output/points_visualization.png"
+        }
+      ],
+      "deliverables": [
+        "generate_points.py",
+        "results_output/random_points.csv",
+        "results_output/points_visualization.png"
+      ],
+      "testingCriteria": [
+        "Dataset = 4000 rows with columns x1,x2,R",
+        "Class counts balanced (2000 each)",
+        "All coordinates within [0,1]",
+        "Scatter plot shows clear separation"
+      ]
+    },
+    {
+      "id": "T2",
+      "phase": "Phase 2: Manual Core Algorithm",
+      "title": "Implement gradient-ascent logistic regression",
+      "description": "Load dataset, build gradient-ascent loop, and emit history/results tables.",
+      "estimatedTime": 35,
+      "actualTime": 35,
+      "status": "completed",
+      "priority": "high",
+      "dependencies": ["T1"],
+      "subtasks": [
+        {
+          "id": "T2.1",
+          "title": "Data prep and parameters",
+          "description": "Load CSV, add bias term, initialize β, learning rate, and iteration controls.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:1-33"
+        },
+        {
+          "id": "T2.2",
+          "title": "Implement math primitives",
+          "description": "Define sigmoid, log-likelihood, and error helper functions.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:35-58"
+        },
+        {
+          "id": "T2.3",
+          "title": "Gradient-ascent loop",
+          "description": "Iteratively compute z, probabilities, gradient, update β, and detect convergence.",
+          "estimatedTime": 15,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:60-135"
+        },
+        {
+          "id": "T2.4",
+          "title": "Persist metrics",
+          "description": "Write gradient_descent_history.csv and logistic_regression_results.csv including avg error row.",
+          "estimatedTime": 8,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:137-190",
+          "outputFiles": [
+            "results_output/gradient_descent_history.csv",
+            "results_output/logistic_regression_results.csv"
+          ]
+        }
+      ],
+      "deliverables": [
+        "logistic_regression.py",
+        "results_output/gradient_descent_history.csv",
+        "results_output/logistic_regression_results.csv"
+      ],
+      "testingCriteria": [
+        "Loop converges within 500 iterations",
+        "Accuracy >= 99%",
+        "History CSV has iteration + β columns",
+        "Results CSV includes sigma(x1,x2) and error"
+      ]
+    },
+    {
+      "id": "T3",
+      "phase": "Phase 3: Manual Visualizations",
+      "title": "Render educational plots for manual model",
+      "description": "Create 3D classification surface and training metrics plot from manual outputs.",
+      "estimatedTime": 20,
+      "actualTime": 20,
+      "status": "completed",
+      "priority": "medium",
+      "dependencies": ["T2"],
+      "subtasks": [
+        {
+          "id": "T3.1",
+          "title": "3D classification surface",
+          "description": "Plot probabilities per point, meshgrid sigmoid surface, and decision contour at 0.5.",
+          "estimatedTime": 12,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:192-279",
+          "outputFile": "results_output/classification_results_3d.png"
+        },
+        {
+          "id": "T3.2",
+          "title": "Training metrics chart",
+          "description": "Plot average error and log-likelihood vs iterations using dual-axis chart.",
+          "estimatedTime": 8,
+          "status": "completed",
+          "codeLocation": "logistic_regression.py:281-332",
+          "outputFile": "results_output/training_metrics.png"
+        }
+      ],
+      "deliverables": [
+        "results_output/classification_results_3d.png",
+        "results_output/training_metrics.png"
+      ],
+      "testingCriteria": [
+        "PNG files saved without exceptions",
+        "Legends and axis labels present",
+        "Decision boundary contour visible",
+        "Metrics chart shows monotonic error decrease"
+      ]
+    },
+    {
+      "id": "T4",
+      "phase": "Phase 4: Scikit-Learn Comparison",
+      "title": "Validate manual model against scikit-learn",
+      "description": "Train LBFGS logistic regression, compare metrics, and create comparison visuals.",
+      "estimatedTime": 15,
+      "actualTime": 15,
+      "status": "completed",
+      "priority": "medium",
+      "dependencies": ["T2"],
+      "subtasks": [
+        {
+          "id": "T4.1",
+          "title": "Train baseline model",
+          "description": "Load dataset, configure scikit-learn LogisticRegression, and output accuracy + coefficients.",
+          "estimatedTime": 5,
+          "status": "completed",
+          "codeLocation": "logistic_regression_sklearn.py:1-80"
+        },
+        {
+          "id": "T4.2",
+          "title": "Ingest manual metrics",
+          "description": "Read history/results CSVs, extract β values, and compute manual accuracy.",
+          "estimatedTime": 4,
+          "status": "completed",
+          "codeLocation": "logistic_regression_sklearn.py:82-131"
+        },
+        {
+          "id": "T4.3",
+          "title": "Produce comparison artifacts",
+          "description": "Generate comparison_manual_vs_sklearn.csv, bar/scatter/metric plots, and decision-surface figure.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "logistic_regression_sklearn.py:133-329",
+          "outputFiles": [
+            "results_output/comparison_manual_vs_sklearn.csv",
+            "results_output/comparison_visualization.png",
+            "results_output/comparison_decision_surfaces.png"
+          ]
+        }
+      ],
+      "deliverables": [
+        "logistic_regression_sklearn.py",
+        "results_output/comparison_manual_vs_sklearn.csv",
+        "results_output/comparison_visualization.png",
+        "results_output/comparison_decision_surfaces.png"
+      ],
+      "testingCriteria": [
+        "Scikit-learn accuracy matches manual accuracy",
+        "CSV lists both β values and iteration counts",
+        "Visuals highlight coefficient differences",
+        "Correlation annotation appears on scatter plot"
+      ]
+    },
+    {
+      "id": "T5",
+      "phase": "Phase 5: Pipeline Integration",
+      "title": "Automate workflow via main.py",
+      "description": "Create orchestrator that runs generation, manual training, and comparison with status messaging.",
+      "estimatedTime": 15,
+      "actualTime": 15,
+      "status": "completed",
+      "priority": "medium",
+      "dependencies": ["T1", "T2", "T4"],
+      "subtasks": [
+        {
+          "id": "T5.1",
+          "title": "Reusable runner",
+          "description": "Build helper to execute scripts with progress banners and error handling.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "main.py:1-34"
+        },
+        {
+          "id": "T5.2",
+          "title": "Pipeline sequence",
+          "description": "Invoke generation, manual training, and comparison scripts; verify dataset existence.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "main.py:36-86"
+        },
+        {
+          "id": "T5.3",
+          "title": "Success summary",
+          "description": "Print list of expected artifacts in results_output/ so users can inspect outputs.",
+          "estimatedTime": 3,
+          "status": "completed",
+          "codeLocation": "main.py:88-112"
+        }
+      ],
+      "deliverables": [
+        "main.py"
+      ],
+      "testingCriteria": [
+        "Single command executes entire workflow",
+        "Gracefully exits if dataset missing",
+        "Displays generated file checklist",
+        "Comparison step failure does not halt manual results"
+      ]
+    },
+    {
+      "id": "T6",
+      "phase": "Phase 6: Documentation & PRD Refresh",
+      "title": "Update knowledge base",
+      "description": "Align README, PRD, tasks.json, and support files with manual vs scikit-learn architecture.",
+      "estimatedTime": 15,
+      "actualTime": 15,
+      "status": "completed",
+      "priority": "medium",
+      "dependencies": ["T1", "T2", "T3", "T4", "T5"],
+      "subtasks": [
+        {
+          "id": "T6.1",
+          "title": "README expansion",
+          "description": "Document component diagram, data flow, formulas, and usage instructions with image references.",
+          "estimatedTime": 6,
+          "status": "completed",
+          "codeLocation": "README.md"
+        },
+        {
+          "id": "T6.2",
+          "title": "PRD v1.1",
+          "description": "Revise scope, architecture, metrics, and references to include scikit-learn comparison and remove screenshot dependencies.",
+          "estimatedTime": 5,
+          "status": "completed",
+          "codeLocation": "PRD.md"
+        },
+        {
+          "id": "T6.3",
+          "title": "Task + history alignment",
+          "description": "Update tasks.json (this file) and ensure prompts.md captures development narrative.",
+          "estimatedTime": 4,
+          "status": "completed",
+          "codeLocation": "tasks.json"
+        }
+      ],
+      "deliverables": [
+        "README.md",
+        "PRD.md",
+        "tasks.json",
+        "prompts.md",
+        "requirements.txt",
+        ".gitignore"
+      ],
+      "testingCriteria": [
+        "Diagrams match current architecture",
+        "PRD references code files over screenshots",
+        "README links to new comparison artifacts",
+        "Total effort sums to 120 minutes"
+      ]
+    }
+  ],
+  "summary": {
+    "totalTasks": 6,
+    "totalSubtasks": 24,
+    "estimatedTime": 120,
+    "actualTime": 120,
+    "completedTasks": 6,
+    "completionRate": "100%"
+  },
+  "deliverables": {
+    "code": [
+      "generate_points.py",
+      "logistic_regression.py",
+      "logistic_regression_sklearn.py",
+      "main.py"
+    ],
+    "data": [
+      "results_output/random_points.csv",
+      "results_output/gradient_descent_history.csv",
+      "results_output/logistic_regression_results.csv"
+    ],
+    "visualizations": [
+      "results_output/points_visualization.png",
+      "results_output/classification_results_3d.png",
+      "results_output/training_metrics.png",
+      "results_output/comparison_visualization.png",
+      "results_output/comparison_decision_surfaces.png"
+    ],
+    "documentation": [
+      "README.md",
+      "PRD.md",
+      "tasks.json",
+      "prompts.md"
+    ],
+    "configuration": [
+      "requirements.txt",
+      ".gitignore"
+    ]
+  },
+  "keyMilestones": [
+    {
+      "milestone": "Data generation working",
+      "completionTime": 20,
+      "status": "completed"
+    },
+    {
+      "milestone": "Manual training converges",
+      "completionTime": 55,
+      "status": "completed"
+    },
+    {
+      "milestone": "Manual visualizations exported",
+      "completionTime": 75,
+      "status": "completed"
+    },
+    {
+      "milestone": "Scikit-learn comparison finished",
+      "completionTime": 90,
+      "status": "completed"
+    },
+    {
+      "milestone": "Pipeline + docs finalized",
+      "completionTime": 120,
+      "status": "completed"
+    }
+  ],
+  "technicalSpecifications": {
+    "formulaImplementations": [
+      {
+        "formula": "Sigmoid: p = 1 / (1 + exp(-z))",
+        "codeLocation": "logistic_regression.py:41-42",
+        "taskId": "T2.2"
+      },
+      {
+        "formula": "Gradient: g = X^T · (y - p)",
+        "codeLocation": "logistic_regression.py:90-94",
+        "taskId": "T2.3"
+      },
+      {
+        "formula": "Update: β_new = β_old + η · g",
+        "codeLocation": "logistic_regression.py:98-101",
+        "taskId": "T2.3"
+      }
+    ],
+    "parameters": {
+      "sampleSize": 4000,
+      "pointsPerGroup": 2000,
+      "group0Center": [0.2, 0.2],
+      "group1Center": [0.8, 0.8],
+      "standardDeviation": 0.08,
+      "learningRate": 0.1,
+      "maxIterations": 10000,
+      "errorThreshold": 0.01,
+      "randomSeed": 42
+    }
+  },
+  "performanceMetrics": {
+    "manualImplementation": {
+      "accuracy": "100%",
+      "iterations": 6,
+      "averageError": 0.000168,
+      "logLikelihood": "-0.005",
+      "misclassified": 0
+    },
+    "scikitLearnBaseline": {
+      "accuracy": "100%",
+      "iterations": 9,
+      "solver": "lbfgs",
+      "misclassified": 0
+    },
+    "targets": {
+      "accuracy": ">= 99%",
+      "iterations": "< 500",
+      "averageError": "< 0.01",
+      "executionTime": "< 5 seconds"
+    },
+    "status": "Manual and scikit-learn models achieve identical predictions with perfect accuracy."
+  }
+}
